@@ -15,7 +15,7 @@ function Preview() {
       <Screensizebtn screenSizes={screenSizes} />
 
       <div className="preview flex-grow w-full h-[90%] dark:bg-cyan-700 p-2 rounded-lg">
-        <div className="border rounded-sm p-2 flex justify-center items-center">
+        <div className="border rounded-sm p-2 h-full flex justify-center items-center">
           Here's preview section
         </div>
       </div>
