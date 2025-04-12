@@ -15,7 +15,7 @@ function TopNav() {
             Home
           </a>
           <a
-            href="#features"
+            href="/#features"
             className="px-3 py-2 rounded-md hover:bg-fuchsia-100 dark:hover:bg-fuchsia-600 dark:hover:text-white transition-colors"
           >
             Features
