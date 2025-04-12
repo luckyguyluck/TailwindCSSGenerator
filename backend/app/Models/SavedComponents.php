@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class SavedComponents extends Model
 {
     protected $fillable = [
-        "id" , "email" , "username" , "password" , "type"
+        "id" , "user_id" , "title" , "component_data"
     ];
 }

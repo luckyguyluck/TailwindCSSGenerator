@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PaddingController extends Controller
+class ClassesController extends Controller
 {
     //
 }

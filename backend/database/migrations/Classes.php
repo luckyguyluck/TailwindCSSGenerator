@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('margins', function (Blueprint $table) {
+        Schema::create('classes', function (Blueprint $table) {
             $table->id();
-            $classname -> string();
-            $prefix -> string();
-            $type -> string();
-            });
+            $table->string('classname');
+            $table->string('prefix');
+            $table->string('type');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('margins');
+        Schema::dropIfExists('classes');
     }
 };
