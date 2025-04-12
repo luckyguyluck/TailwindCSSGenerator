@@ -1,17 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, act } from "react";
+import useSlider from "../../../Hooks/useSlider";
 
 function Margin() {
-  const [nSlider, setNSlider] = useState(16);
+  const {nSlider , setNSlider , tailwindClass} = useSlider("m" , "0");
   const [marginClass, setMarginClass] = useState("m-4");
   const [activeInput, setActiveInput] = useState("preset"); // "preset" | "fraction" | "slider"
 
   const isDisabled = (type) => activeInput !== type;
 
-  useEffect(() => {
-    if (activeInput === "slider") {
-      setMarginClass(`m-[${nSlider}px]`);
-    }
-  }, [nSlider, activeInput]);
+  if(activeInput === "slider" && marginClass !== tailwindClass){
+    setMarginClass(tailwindClass);
+  }
 
   const handlePresetClick = (value) => {
     setActiveInput("preset");
@@ -82,9 +81,9 @@ function Margin() {
           name="range"
           id="range"
           min={0}
-          max={64}
+          max={32}
           value={nSlider}
-          onChange={(e) => setNSlider(e.target.value)}
+          onChange={(e) => setNSlider(Number(e.target.value))}
           disabled={isDisabled("slider")}
           className="disabled:opacity-40"
         />

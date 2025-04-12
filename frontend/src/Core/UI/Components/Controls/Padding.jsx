@@ -1,22 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useSlider from "../../../Hooks/useSlider";
+
 
 function Padding() {
-  const [nSlider, setNSlider] = useState(16);
+  const [activeInput, setActiveInput] = useState("preset"); // "preset" | "slider"
+  const { nSlider, setNSlider, tailwindClass } = useSlider("p" , "4")
   const [paddingClass, setPaddingClass] = useState("p-4");
-  const [activeInput, setActiveInput] = useState("preset"); // "preset" | "fraction" | "slider"
 
   const isDisabled = (type) => activeInput !== type;
-
-  useEffect(() => {
-    if (activeInput === "slider") {
-      setPaddingClass(`p-[${nSlider}px]`);
-    }
-  }, [nSlider, activeInput]);
 
   const handlePresetClick = (value) => {
     setActiveInput("preset");
     setPaddingClass(value);
   };
+
+  // Sync tailwindClass when slider is active
+  if (activeInput === "slider" && paddingClass !== tailwindClass) {
+    setPaddingClass(tailwindClass);
+  }
 
   return (
     <div className="w-full p-4 mb-2 bg-cyan-700 rounded text-white">
@@ -32,39 +33,20 @@ function Padding() {
         <label className="text-lg font-medium">Use Preset Buttons</label>
       </div>
       <div className="flex gap-4 mb-4">
-        <button
-          onClick={() => handlePresetClick("p-0")}
-          disabled={isDisabled("preset")}
-          className={`px-3 py-1 rounded-xl transition ${
-            isDisabled("preset")
-              ? "bg-cyan-900 cursor-not-allowed opacity-50"
-              : "bg-cyan-600 hover:bg-cyan-400 cursor-pointer"
-          }`}
-        >
-          p-0
-        </button>
-        <button
-          onClick={() => handlePresetClick("p-4")}
-          disabled={isDisabled("preset")}
-          className={`px-3 py-1 rounded-xl transition ${
-            isDisabled("preset")
-              ? "bg-cyan-900 cursor-not-allowed opacity-50"
-              : "bg-cyan-600 hover:bg-cyan-400 cursor-pointer"
-          }`}
-        >
-          p-4
-        </button>
-        <button
-          onClick={() => handlePresetClick("p-8")}
-          disabled={isDisabled("preset")}
-          className={`px-3 py-1 rounded-xl transition ${
-            isDisabled("preset")
-              ? "bg-cyan-900 cursor-not-allowed opacity-50"
-              : "bg-cyan-600 hover:bg-cyan-400 cursor-pointer"
-          }`}
-        >
-          p-8
-        </button>
+        {["p-0", "p-4", "p-8"].map((preset) => (
+          <button
+            key={preset}
+            onClick={() => handlePresetClick(preset)}
+            disabled={isDisabled("preset")}
+            className={`px-3 py-1 rounded-xl transition ${
+              isDisabled("preset")
+                ? "bg-cyan-900 cursor-not-allowed opacity-50"
+                : "bg-cyan-600 hover:bg-cyan-400 cursor-pointer"
+            }`}
+          >
+            {preset}
+          </button>
+        ))}
       </div>
 
       {/* === Slider Section === */}
@@ -83,18 +65,13 @@ function Padding() {
           name="range"
           id="range"
           min={0}
-          max={64}
+          max={32}
           value={nSlider}
-          onChange={(e) => setNSlider(e.target.value)}
+          onChange={(e) => setNSlider(Number(e.target.value))}
           disabled={isDisabled("slider")}
           className="disabled:opacity-40"
         />
-        <span className="text-sm opacity-80">{nSlider}px</span>
-      </div>
-
-      {/* Output */}
-      <div className="mt-2 text-sm opacity-80">
-        Tailwind Class: <code className="bg-black px-2 py-1 rounded">{paddingClass}</code>
+        <span className="text-sm opacity-80">{nSlider}</span>
       </div>
     </div>
   );

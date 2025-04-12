@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react";
+import useSlider from "../../../Hooks/useSlider";
 
 function Width() {
-  const [nSlider, setNSlider] = useState(100);
+  const {nSlider, setNSlider, tailwindClass} = useSlider("w", "0");
   const [widthClass, setWidthClass] = useState("w-full");
   const [activeInput, setActiveInput] = useState("preset"); // "preset" | "fraction" | "slider"
 
   const isDisabled = (type) => activeInput !== type;
 
-  useEffect(() => {
-    if (activeInput === "slider") {
-      setWidthClass(`w-${nSlider}`);
-    }
-  }, [nSlider, activeInput]);
-
   const handlePresetClick = (value) => {
     setActiveInput("preset");
     setWidthClass(value);
   };
+
+  // Using useEffect to update widthClass based on tailwindClass from slider
+  useEffect(() => {
+    if (activeInput === "slider" && widthClass !== tailwindClass) {
+      setWidthClass(tailwindClass);
+    }
+  }, [activeInput, widthClass, tailwindClass]);
 
   return (
     <div className="w-full p-4 mb-2 bg-cyan-700 rounded text-white">
@@ -98,10 +100,10 @@ function Width() {
           name="range"
           id="range"
           min={0}
-          max={100}
+          max={96}
           disabled={isDisabled("slider")}
           value={nSlider}
-          onChange={(e) => setNSlider(e.target.value)}
+          onChange={(e) => setNSlider(Number(e.target.value))}
           className="disabled:opacity-40"
         />
         <span className="text-sm opacity-80">{nSlider}</span>
