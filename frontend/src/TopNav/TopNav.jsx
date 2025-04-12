@@ -1,6 +1,6 @@
 function TopNav() {
     return (
-      <div className="w-full h-16 flex items-center justify-between px-6 py-3 bg-cyan-100 dark:bg-cyan-800 shadow-sm">
+      <div className="w-full h-16 flex items-center justify-between px-6 py-3 bg-cyan-100 dark:bg-cyan-800 shadow-sm z-10">
         {/* Logo / Title */}
         <div className="text-2xl font-bold text-nowrap text-cyan-900 dark:text-cyan-200">
           Tailwind Generator

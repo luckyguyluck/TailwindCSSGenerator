@@ -12,7 +12,7 @@ function App() {
 
       <div className="w-full min-h-screen dark:bg-gray-950 bg-cyan-100">
         {/* Top nav */}
-        <div className="w-full fixed">
+        <div className="w-full fixed z-50">
           <TopNav />
         </div>
         <div className="w-full min-h-screenm pt-16">
