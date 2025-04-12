@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('TailwindClasses', function (Blueprint $table) {
             $table->id();
             $table->string('classname');
             $table->string('prefix');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('TailwindClasses');
     }
 };
