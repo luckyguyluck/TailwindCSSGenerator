@@ -39,7 +39,8 @@ A powerful, beginner-friendly visual tool that allows developers to **generate T
 ## 🗺 Roadmap
 
 - [x] Landing Page
-- [ ] UI UX Frontend
+- [x] UI UX Frontend
+- [x] Safelist creation for css previewing
 - [ ] Database Structure
 - [ ] RestFul Api management
 - [ ] Hooks and Components for functionality
