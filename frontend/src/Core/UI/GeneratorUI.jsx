@@ -1,5 +1,5 @@
 import Preview from "./Components/Preview";
-import Controls from "./Components/Controls";
+import Width from "./Components/Controls/Width";
 
 function GeneratorUI(){
 
@@ -15,7 +15,7 @@ function GeneratorUI(){
                         <Preview />
                     </div>
                     <div className="flex-1/3 bg-cyan-100 dark:bg-cyan-800 p-2 text-cyan-900 dark:text-white">
-                        <Controls />
+                        <Width />
                     </div>
                 </div>
 
