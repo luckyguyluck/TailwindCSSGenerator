@@ -2,7 +2,11 @@ import Preview from "./Components/Preview";
 import Width from "./Components/Controls/Width";
 import Padding from "./Components/Controls/Padding";
 import Margin from "./Components/Controls/Margin";
-import TextSize from "./Components/Controls/TextSize";
+import Text from "./Components/Controls/Text";
+import Border from "./Components/Controls/Border";
+import TextColorPicker from "./Components/Controls/TextColorPicker";
+import BgColorPicker from "./Components/Controls/BgColorPicker";
+
 
 function GeneratorUI(){
 
@@ -21,7 +25,10 @@ function GeneratorUI(){
                         <Width />
                         <Padding />
                         <Margin />
-                        <TextSize />
+                        <Text />
+                        <TextColorPicker />
+                        <Border />
+                        <BgColorPicker />
                     </div>
                 </div>
 

@@ -3,6 +3,7 @@ import TopNav from "./TopNav/TopNav"
 import Footer from "./Components/Footer"
 import GeneratorUI from "./Core/UI/GeneratorUI"
 import { Routes, Route} from "react-router-dom"
+import SafelistHelper from "./Components/SafelistHelper"
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         </div>
       </div>
     
+    <SafelistHelper />
     </>
   )
 }
