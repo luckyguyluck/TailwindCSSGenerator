@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Saved_Components', function (Blueprint $table) {
+        Schema::create('tailwind_classes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('title'); // Example additional field
-            $table->json('component_data'); // Store component structure
+            $table->string("class_name");
+            $table->string("prefix");
+            $table->string("type");
             $table->timestamps();
         });
-
     }
 
     /**
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('saved_components');
+        Schema::dropIfExists('tailwind_classes');
     }
 };
