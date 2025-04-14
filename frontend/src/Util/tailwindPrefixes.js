@@ -2,19 +2,55 @@
 export const tailwindPrefixes = {
     width: {
       prefix: "w",
-      scales: [0, 0.5, 1, 2, 4, 8, 10, "1/2", "full", "screen"],
+      scales: [1, 2, 4, 8, 10, "1/2" , " 1/4 " , "full", "screen"],
     },
     height: {
       prefix: "h",
-      scales: [0, 1, 2, 4, 6, 8, "auto", "full", "screen"],
+      scales: [1, 2, 4, 6, 8, 10, "auto", "full", "screen"],
     },
     margin: {
-      prefix: "m",
-      scales: [0, 1, 2, 4, 8, 12, 16, "auto"],
+      rounded : {
+        prefix: "m",
+        scales: [0, 1, 2, 4, 8, 12, 16, "auto"],
+      },
+      bot: {
+        prefix: "mb",
+        scales: [0, 1, 2, 4, 8, 12, 16, "auto"],
+      },
+      top: {
+        prefix: "mt",
+        scales: [0, 1, 2, 4, 8, 12, 16, "auto"],
+      },
+      left: {
+        prefix: "ms",
+        scales: [0, 1, 2, 4, 8, 12, 16, "auto"],
+      },
+      right: {
+        prefix: "me",
+        scales: [0, 1, 2, 4, 8, 12, 16, "auto"],
+      },
     },
     padding: {
-      prefix: "p",
-      scales: [0, 1, 2, 4, 8, 12, 16],
+      rounded:{
+        prefix: "p",
+        scales: [0, 1, 2, 4, 8, 12, 16],
+      },
+      top : {
+        prefix : "pt",
+        scales: [0, 1, 2, 4, 8, 12, 16],
+      },
+      bot : {
+        prefix : "pb",
+        scales: [0, 1, 2, 4, 8, 12, 16],
+      },
+      left : {
+        prefix : "ps",
+        scales: [0, 1, 2, 4, 8, 12, 16],
+      },
+      right : {
+        prefix : "pe",
+        scales: [0, 1, 2, 4, 8, 12, 16],
+      },
     },
     text_size: {
       prefix: "text",
