@@ -1,23 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { tailwindPrefixes } from "../../../../Util/tailwindPrefixes";
 import useSlider from "../../../Hooks/useSlider";
 
-
 function Padding() {
-  const [activeInput, setActiveInput] = useState("preset"); // "preset" | "slider"
-  const { nSlider, setNSlider, tailwindClass } = useSlider("p" , "4")
-  const [paddingClass, setPaddingClass] = useState("p-4");
+  const [paddingClass, setPaddingClass] = useState("p-0");
+  const [activeInput, setActiveInput] = useState("preset"); // "preset" | "fraction" | "slider"
+  const [finalOutput , setFinalOutput] = useState("");
+  // Extract width prefix and scales from tailwindPrefixes
+  const { prefix, scales } = tailwindPrefixes.padding;
+
+  // Using the useSlider hook to manage slider state
+  const { nSlider, setNSlider, tailwindClass } = useSlider("p", "0");
 
   const isDisabled = (type) => activeInput !== type;
 
   const handlePresetClick = (value) => {
     setActiveInput("preset");
-    setPaddingClass(value);
+    setPaddingClass(`${prefix}-${value}`);
+    setFinalOutput(`${prefix}-${value}`);
   };
 
-  // Sync tailwindClass when slider is active
-  if (activeInput === "slider" && paddingClass !== tailwindClass) {
-    setPaddingClass(tailwindClass);
-  }
+  useEffect(() => {
+    console.log(finalOutput);
+  }, [finalOutput]);
+
+  // Using useEffect to update paddingClass based on tailwindClass from slider
+  useEffect(() => {
+    if (activeInput === "slider" && paddingClass !== tailwindClass) {
+      setPaddingClass(`${tailwindClass}`);
+      setFinalOutput(`${tailwindClass}`);
+    }
+  }, [activeInput, paddingClass, tailwindClass]);
 
   return (
     <div className="w-full p-4 mb-2 bg-cyan-700 rounded text-white">
@@ -29,14 +42,15 @@ function Padding() {
           type="checkbox"
           checked={activeInput === "preset"}
           onChange={() => setActiveInput("preset")}
+          id="paddingpresetchecker"
         />
-        <label className="text-lg font-medium">Use Preset Buttons</label>
+        <label className="text-lg font-medium" htmlFor="paddingpresetchecker">Use Preset Buttons</label>
       </div>
-      <div className="flex gap-4 mb-4">
-        {["p-0", "p-4", "p-8"].map((preset) => (
+      <div className="flex flex-wrap gap-2 mb-4">
+        {scales.map((scale, index) => (
           <button
-            key={preset}
-            onClick={() => handlePresetClick(preset)}
+            key={index}
+            onClick={() => handlePresetClick(scale)}
             disabled={isDisabled("preset")}
             className={`px-3 py-1 rounded-xl transition ${
               isDisabled("preset")
@@ -44,7 +58,7 @@ function Padding() {
                 : "bg-cyan-600 hover:bg-cyan-400 cursor-pointer"
             }`}
           >
-            {preset}
+            {`${prefix}-${scale}`}
           </button>
         ))}
       </div>
@@ -55,8 +69,9 @@ function Padding() {
           type="checkbox"
           checked={activeInput === "slider"}
           onChange={() => setActiveInput("slider")}
+          id="paddingsliderchecker"
         />
-        <label className="text-lg font-medium">Use Slider</label>
+        <label className="text-lg font-medium" htmlFor="paddingsliderchecker">Use Slider</label>
       </div>
       <div className="flex items-center gap-2 mb-2">
         <label htmlFor="range">p-</label>
@@ -65,13 +80,19 @@ function Padding() {
           name="range"
           id="range"
           min={0}
-          max={32}
+          max={20} // You can adjust the max value as per your preference
+          step={2}
+          disabled={isDisabled("slider")}
           value={nSlider}
           onChange={(e) => setNSlider(Number(e.target.value))}
-          disabled={isDisabled("slider")}
           className="disabled:opacity-40"
         />
         <span className="text-sm opacity-80">{nSlider}</span>
+      </div>
+
+      {/* Displaying the selected Tailwind class */}
+      <div className="mt-4 flex items-center justify-center p-2">
+        <p className="text-lg bg-cyan-900 p-2 rounded-xl">Class = "{paddingClass}"</p>
       </div>
     </div>
   );

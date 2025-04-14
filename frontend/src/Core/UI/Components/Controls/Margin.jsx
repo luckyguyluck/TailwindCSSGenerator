@@ -1,21 +1,36 @@
-import { useState, useEffect, act } from "react";
+import { useState, useEffect } from "react";
+import { tailwindPrefixes } from "../../../../Util/tailwindPrefixes";
 import useSlider from "../../../Hooks/useSlider";
 
-function Margin() {
-  const {nSlider , setNSlider , tailwindClass} = useSlider("m" , "0");
-  const [marginClass, setMarginClass] = useState("m-4");
+function Padding() {
+  const [marginClass, setMarginClass] = useState("p-0");
   const [activeInput, setActiveInput] = useState("preset"); // "preset" | "fraction" | "slider"
+  const [finalOutput , setFinalOutput] = useState("");
+  // Extract width prefix and scales from tailwindPrefixes
+  const { prefix, scales } = tailwindPrefixes.margin;
+
+  // Using the useSlider hook to manage slider state
+  const { nSlider, setNSlider, tailwindClass } = useSlider("m", "0");
 
   const isDisabled = (type) => activeInput !== type;
 
-  if(activeInput === "slider" && marginClass !== tailwindClass){
-    setMarginClass(tailwindClass);
-  }
-
   const handlePresetClick = (value) => {
     setActiveInput("preset");
-    setMarginClass(value);
+    setMarginClass(`${prefix}-${value}`);
+    setFinalOutput(`${prefix}-${value}`);
   };
+
+  useEffect(() => {
+    console.log(finalOutput);
+  }, [finalOutput]);
+
+  // Using useEffect to update marginClass based on tailwindClass from slider
+  useEffect(() => {
+    if (activeInput === "slider" && marginClass !== tailwindClass) {
+      setMarginClass(`${tailwindClass}`);
+      setFinalOutput(`${tailwindClass}`);
+    }
+  }, [activeInput, marginClass, tailwindClass]);
 
   return (
     <div className="w-full p-4 mb-2 bg-cyan-700 rounded text-white">
@@ -27,52 +42,36 @@ function Margin() {
           type="checkbox"
           checked={activeInput === "preset"}
           onChange={() => setActiveInput("preset")}
+          id="marginpresetchecker"
         />
-        <label className="text-lg font-medium">Use Preset Buttons</label>
+        <label className="text-lg font-medium" htmlFor="marginpresetchecker">Use Preset Buttons</label>
       </div>
-      <div className="flex gap-4 mb-4">
-        <button
-          onClick={() => handlePresetClick("m-0")}
-          disabled={isDisabled("preset")}
-          className={`px-3 py-1 rounded-xl transition ${
-            isDisabled("preset")
-              ? "bg-cyan-900 cursor-not-allowed opacity-50"
-              : "bg-cyan-600 hover:bg-cyan-400 cursor-pointer"
-          }`}
-        >
-          m-0
-        </button>
-        <button
-          onClick={() => handlePresetClick("m-4")}
-          disabled={isDisabled("preset")}
-          className={`px-3 py-1 rounded-xl transition ${
-            isDisabled("preset")
-              ? "bg-cyan-900 cursor-not-allowed opacity-50"
-              : "bg-cyan-600 hover:bg-cyan-400 cursor-pointer"
-          }`}
-        >
-          m-4
-        </button>
-        <button
-          onClick={() => handlePresetClick("m-8")}
-          disabled={isDisabled("preset")}
-          className={`px-3 py-1 rounded-xl transition ${
-            isDisabled("preset")
-              ? "bg-cyan-900 cursor-not-allowed opacity-50"
-              : "bg-cyan-600 hover:bg-cyan-400 cursor-pointer"
-          }`}
-        >
-          m-8
-        </button>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {scales.map((scale, index) => (
+          <button
+            key={index}
+            onClick={() => handlePresetClick(scale)}
+            disabled={isDisabled("preset")}
+            className={`px-3 py-1 rounded-xl transition ${
+              isDisabled("preset")
+                ? "bg-cyan-900 cursor-not-allowed opacity-50"
+                : "bg-cyan-600 hover:bg-cyan-400 cursor-pointer"
+            }`}
+          >
+            {`${prefix}-${scale}`}
+          </button>
+        ))}
       </div>
+
       {/* === Slider Section === */}
       <div className="flex items-center gap-3 mb-2">
         <input
           type="checkbox"
           checked={activeInput === "slider"}
           onChange={() => setActiveInput("slider")}
+          id="marginsliderchecker"
         />
-        <label className="text-lg font-medium">Use Slider</label>
+        <label className="text-lg font-medium" htmlFor="marginsliderchecker">Use Slider</label>
       </div>
       <div className="flex items-center gap-2 mb-2">
         <label htmlFor="range">m-</label>
@@ -81,21 +80,22 @@ function Margin() {
           name="range"
           id="range"
           min={0}
-          max={32}
+          max={20} // You can adjust the max value as per your preference
+          step={2}
+          disabled={isDisabled("slider")}
           value={nSlider}
           onChange={(e) => setNSlider(Number(e.target.value))}
-          disabled={isDisabled("slider")}
           className="disabled:opacity-40"
         />
-        <span className="text-sm opacity-80">{nSlider}px</span>
+        <span className="text-sm opacity-80">{nSlider}</span>
       </div>
 
-      {/* Output */}
-      <div className="mt-2 text-sm opacity-80">
-        Tailwind Class: <code className="bg-black px-2 py-1 rounded">{marginClass}</code>
+      {/* Displaying the selected Tailwind class */}
+      <div className="mt-4 flex items-center justify-center p-2">
+        <p className="text-lg bg-cyan-900 p-2 rounded-xl">Class = "{marginClass}"</p>
       </div>
     </div>
   );
 }
 
-export default Margin;
+export default Padding;
