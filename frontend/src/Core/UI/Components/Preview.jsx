@@ -11,11 +11,11 @@ function Preview() {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col">
+    <div className="w-full h-full flex flex-col">
       <Screensizebtn screenSizes={screenSizes} />
 
       <div className="preview flex-grow flex justify-center items-center w-full h-full dark:bg-cyan-700 p-2 rounded-lg">
-        <div className="border rounded-sm p-2 h-full flex justify-center items-center">
+        <div className="border rounded-sm p-2 w-full h-full flex justify-center items-center">
           Here's preview section
         </div>
       </div>

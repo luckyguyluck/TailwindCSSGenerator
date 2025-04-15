@@ -8,10 +8,10 @@ function usePreset(prefix, initial) {
     setTailwindClass(`${prefix}-${changes}`);
   }, [changes, prefix]); // Only depends on what's needed
 
-  return [
+  return {
     setChanges,
     presettailwindClass,
-  ];
+};
 }
 
 export default usePreset;

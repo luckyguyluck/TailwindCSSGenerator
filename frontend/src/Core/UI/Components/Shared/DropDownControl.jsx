@@ -6,7 +6,7 @@ const DropDownControl = ({ title, children , bgcolor }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className={`bg-white rounded-xl shadow p-3 space-y-2 ${bgcolor}`}>
+    <div className={`w-full rounded-xl shadow p-3 mb-1 space-y-2 ${bgcolor}`}>
       <div
         className="flex justify-between items-center cursor-pointer select-none"
         onClick={() => setOpen(!open)}
@@ -30,7 +30,7 @@ const DropDownControl = ({ title, children , bgcolor }) => {
             transition={{ duration: 0.2, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="mt-2">{children}</div>
+            <div className="mt-1">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
