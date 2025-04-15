@@ -9,7 +9,6 @@ function usePreset(prefix, initial) {
   }, [changes, prefix]); // Only depends on what's needed
 
   return [
-    changes,
     setChanges,
     presettailwindClass,
   ];

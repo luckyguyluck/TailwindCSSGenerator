@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 
-function useToggleInputs(currentInput, fields) {
+function useToggleInputs(initialInput, fields) {
+  const [currentInput, setCurrentInput] = useState(initialInput);
   const [disabledStates, setDisabledStates] = useState(() => {
     const initialStates = {};
     fields.forEach(field => {
-      initialStates[field] = currentInput !== field;
+      initialStates[field] = initialInput !== field;
     });
     return initialStates;
   });
@@ -15,9 +16,13 @@ function useToggleInputs(currentInput, fields) {
       updatedStates[field] = currentInput !== field;
     });
     setDisabledStates(updatedStates);
-  }, [currentInput, fields]);
+  }, [currentInput]);
 
-  return disabledStates;
+  return {
+    disabledStates,
+    currentInput,
+    setCurrentInput
+  };
 }
 
 export default useToggleInputs;

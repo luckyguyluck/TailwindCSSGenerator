@@ -17,6 +17,7 @@ function useSlider(prefix, initial , isFraction , fractionBase = 12) {
     slider,
     setSlider,
     slidertailwindClass,
+    isFraction,
   ];
 }
 
