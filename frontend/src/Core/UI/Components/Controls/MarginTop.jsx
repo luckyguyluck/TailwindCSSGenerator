@@ -14,8 +14,8 @@ function MarginTop({onChange}) {
   const { setChanges, presettailwindClass } = usePreset(parts.prefix, "1");
   const finalOutput = currentInput === "preset" ? presettailwindClass : slidertailwindClass;
   useEffect(()=>{
-    onChange("margin","bot",finalOutput)
-  })
+    onChange("margin","top",finalOutput)
+  },[finalOutput])
 
   return (
     <div className="w-full bg-cyan-200 dark:bg-cyan-800 rounded-2xl p-4 pt-0 mb-4">

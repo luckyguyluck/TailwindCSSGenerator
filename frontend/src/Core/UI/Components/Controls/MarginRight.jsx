@@ -16,7 +16,7 @@ function MarginRight({onChange}) {
 
   useEffect(
     ()=>{
-      onChange("height" , "default" , finalOutput)
+      onChange("margin" , "right" , finalOutput)
     },
     [finalOutput]
   )

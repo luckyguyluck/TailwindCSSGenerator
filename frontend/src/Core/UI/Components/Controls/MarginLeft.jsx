@@ -16,7 +16,7 @@ function MarginLeft({onChange}) {
 
   useEffect(
     ()=>{
-      onChange("height" , "left" , finalOutput)
+      onChange("margin" , "left" , finalOutput)
     },
     [finalOutput]
   )

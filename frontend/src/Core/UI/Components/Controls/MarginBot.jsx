@@ -6,7 +6,7 @@ import useSlider from '../../../Hooks/useSlider';
 import Slider from "../Shared/Slider";
 import { useEffect } from "react";
 
-function MarginBot(onChange) {
+function MarginBot({onChange}) {
   const parts = tailwindPrefixes.margin.bot;
   const fields = ["preset", "slider"];
   const [slider, setSlider, slidertailwindClass, isFraction] = useSlider(parts.prefix, '0', false);

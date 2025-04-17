@@ -77,7 +77,6 @@ function Height({onChange}) {
       {/* finalOutput Output */}
       <div className="w-[90%] p-4 text-center mb-4">
         {finalOutput}
-        {console.log(typeof(finalOutput))}
       </div>
     </div>
   );
