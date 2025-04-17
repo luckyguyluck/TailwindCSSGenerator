@@ -4,6 +4,7 @@ import PresetBtn from "../Shared/PresetBtn";
 import usePreset from "../../../Hooks/usePreset";
 import useSlider from '../../../Hooks/useSlider';
 import Slider from "../Shared/Slider";
+import { useEffect } from "react";
 
 import MarginTop from "./MarginTop";
 import MarginBot from "./MarginBot";
@@ -11,13 +12,20 @@ import MarginLeft from "./MarginLeft"
 import MarginRight from "./MarginRight"
 import DropDownControl from "../Shared/DropDownControl";
 
-function Margin() {
+function Margin({onChange}) {
   const parts = tailwindPrefixes.margin.rounded;
   const fields = ["preset", "slider"];
-  const [slider, setSlider, slidertailwindClass, isFraction] = useSlider(parts.prefix, '0', false);
+  const [slider, setSlider, slidertailwindClass, isFraction] = useSlider(parts.prefix, 'auto', false);
   const { disabledStates, currentInput, setCurrentInput } = useToggleInputs("preset", fields);
-  const { setChanges, presettailwindClass } = usePreset(parts.prefix, "1");
-  const finalOutput = currentInput === "preset" ? presettailwindClass : slidertailwindClass
+  const { setChanges, presettailwindClass } = usePreset(parts.prefix, "0");
+  const finalOutput = currentInput === "preset" ? presettailwindClass : slidertailwindClass;
+
+    useEffect(
+      ()=>{
+        onChange("margin" , "default" , finalOutput)
+      },
+      [finalOutput]
+    )
 
   return (
     <div className="w-full bg-cyan-200 dark:bg-cyan-800 rounded-2xl pt-0 mb-4">
@@ -76,22 +84,26 @@ function Margin() {
       <DropDownControl
         title={"Margin Top"}
         bgcolor={"bg-cyan-500 dark:bg-cyan-900"}>
-            <MarginTop />
+            <MarginTop 
+              onChange = {onChange}/>
       </DropDownControl>
       <DropDownControl
         title={"Margin Bot"}
         bgcolor={"bg-cyan-500 dark:bg-cyan-900"}>
-            <MarginBot />
+            <MarginBot 
+              onChange = {onChange}/>
       </DropDownControl>
       <DropDownControl
         title={"Margin Left"}
         bgcolor={"bg-cyan-500 dark:bg-cyan-900"}>
-            <MarginLeft />
+            <MarginLeft 
+              onChange = {onChange}/>
       </DropDownControl>
       <DropDownControl
         title={"Margin Right"}
         bgcolor={"bg-cyan-500 dark:bg-cyan-900"}>
-            <MarginRight />
+            <MarginRight 
+              onChange = {onChange}/>
       </DropDownControl>
     </div>
   );

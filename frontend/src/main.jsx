@@ -8,8 +8,8 @@ import UtilsTester from './Core/Utils/utiltester.jsx';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
-      {/* <App /> */}
-      <UtilsTester />
+      <App />
+      {/* <UtilsTester /> */}
     </Router>
   </StrictMode>,
 )

@@ -4,14 +4,22 @@ import PresetBtn from "../Shared/PresetBtn";
 import usePreset from "../../../Hooks/usePreset";
 import useSlider from '../../../Hooks/useSlider';
 import Slider from "../Shared/Slider";
+import { useEffect } from "react";
 
-function MarginBot() {
+function MarginBot(onChange) {
   const parts = tailwindPrefixes.margin.bot;
   const fields = ["preset", "slider"];
   const [slider, setSlider, slidertailwindClass, isFraction] = useSlider(parts.prefix, '0', false);
   const { disabledStates, currentInput, setCurrentInput } = useToggleInputs("preset", fields);
   const { setChanges, presettailwindClass } = usePreset(parts.prefix, "1");
-  const finalOutput = currentInput === "preset" ? presettailwindClass : slidertailwindClass
+  const finalOutput = currentInput === "preset" ? presettailwindClass : slidertailwindClass;
+
+  useEffect(
+    ()=>{
+      onChange("margin" , "bot" , finalOutput)
+    },
+    [finalOutput]
+  )
 
   return (
     <div className="w-full bg-cyan-200 dark:bg-cyan-800 rounded-2xl p-4 pt-0 mb-4">

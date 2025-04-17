@@ -39,7 +39,7 @@ export const ComponentBuilder = (pathArray = ["root"], tagName, cssType, key, va
     if (content !== undefined) {
         current.component = content;
     }
-
+    console.log(JSON.stringify(ClassBlueprint))
     return ClassBlueprint;
 };
 
