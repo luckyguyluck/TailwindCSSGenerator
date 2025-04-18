@@ -3,22 +3,28 @@ import DropDownControl from "./Components/Shared/DropDownControl";
 import { ComponentBuilder } from "../Utils/TreeComponentProcessor";
 import Preview from "./Components/Preview";
 import Controllers from "./Components/Controllers";
+import Output from './Components/Output';
 
 function GeneratorUI() {
+  let path = ["root"];
+  let TagName = "div";
 
-  let path = ["root"];  // Start with 'root' as the first path.
-  let index = 1;
+  const [component, setComponent] = useState({});
 
-  const classHandler = (styles , ClassObj)=>{
-    console.log("Path = ",path)
-    console.log("Index = ",index)
-    console.log("Styles = " ,styles)
-    console.log(ClassObj)
-  }
-  
+  const TagNameHandler = (value = "div") => {
+    TagName = value;
+  };
+
+  const classHandler = (ClassObj) => {
+    let newComponent = {};
+
+    newComponent = ComponentBuilder(path, TagName, ClassObj);
+    setComponent({ ...newComponent });
+  };
+
   return (
-    <div className="w-full h-screen overflow-hidden bg-cyan-100 dark:bg-gray-950">
-      <div className="w-full h-full flex">
+    <div className="w-full min-h-screen bg-cyan-100 dark:bg-gray-950">
+      <div className="w-full h-screen flex">
         <div className="flex-2/3 bg-cyan-100 dark:bg-gray-800 p-1 text-cyan-900 dark:text-white">
           <Preview />
         </div>
@@ -27,15 +33,13 @@ function GeneratorUI() {
             title="root"
             bgcolor="bg-cyan-400 dark:bg-cyan-700"
           >
-            <Controllers
-              onChange={classHandler} // Pass the classHandler as the onChange prop
-            />
+            <Controllers onChange={{ classHandler, TagNameHandler }} />
           </DropDownControl>
         </div>
       </div>
 
-      <div className="w-full">
-        {/* You could add a footer or other content here */}
+      <div className="w-full bg-cyan-800 p-4">
+        <Output items={component} /> {/* ✅ Step 3 */}
       </div>
     </div>
   );

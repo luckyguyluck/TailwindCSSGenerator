@@ -1,5 +1,5 @@
 import DropDownControl from "./Shared/DropDownControl"
-
+import TagName from "./Controls/TagName"
 import Width from "./Controls/Width"
 import Height from "./Controls/Height"
 import Margin from "./Controls/Margin"
@@ -28,12 +28,17 @@ function Controllers ({onChange}) {
       
     useEffect(
         ()=>{
-            onChange("styles" , {ClassObj})
+            onChange.classHandler(ClassObj)
         },
         [ClassObj]
     )
     return (
         <div className="w-full">
+
+            <TagName 
+            onChange = {onChange.TagNameHandler}
+            />
+
             <DropDownControl
                 title = "Width"
                 bgcolor={"bg-cyan-400 dark:bg-cyan-800"}>
