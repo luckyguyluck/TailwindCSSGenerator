@@ -6,12 +6,13 @@ function usePreset(prefix, initial) {
 
   useEffect(() => {
     setTailwindClass(`${prefix}-${changes}`);
-  }, [changes, prefix]); // Only depends on what's needed
+  }, [changes, prefix]);
 
   return {
     setChanges,
     presettailwindClass,
-};
+    selectedValue: changes, // <-- expose selected value
+  };
 }
 
 export default usePreset;

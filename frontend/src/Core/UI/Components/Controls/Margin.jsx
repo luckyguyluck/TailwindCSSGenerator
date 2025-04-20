@@ -1,4 +1,4 @@
-import {tailwindPrefixes} from "../../../../Util/tailwindPrefixes";
+import {TailwindMultiClasses} from "../../../../Util/tailwindPrefixes";
 import useToggleInputs from "../../../Hooks/useToggleInputs";
 import PresetBtn from "../Shared/PresetBtn";
 import usePreset from "../../../Hooks/usePreset";
@@ -13,7 +13,7 @@ import MarginRight from "./MarginRight"
 import DropDownControl from "../Shared/DropDownControl";
 
 function Margin({onChange}) {
-  const parts = tailwindPrefixes.margin.rounded;
+  const parts = TailwindBasicClasses.margin.default;
   const fields = ["preset", "slider"];
   const [slider, setSlider, slidertailwindClass, isFraction] = useSlider(parts.prefix, 'auto', false);
   const { disabledStates, currentInput, setCurrentInput } = useToggleInputs("preset", fields);

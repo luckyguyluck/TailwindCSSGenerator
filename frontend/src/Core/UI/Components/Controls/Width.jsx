@@ -1,4 +1,4 @@
-import {tailwindPrefixes} from "../../../../Util/tailwindPrefixes";
+import {TailwindMultiClasses} from "../../../../Util/tailwindPrefixes";
 import useToggleInputs from "../../../Hooks/useToggleInputs";
 import PresetBtn from "../Shared/PresetBtn";
 import usePreset from "../../../Hooks/usePreset";
@@ -7,7 +7,7 @@ import Slider from "../Shared/Slider";
 import { useEffect } from "react";
 
 function Width({onChange}) {
-  const parts = tailwindPrefixes.width;
+  const parts = TailwindBasicClasses.width.default;
   const fields = ["preset", "slider"];
   const [slider, setSlider, slidertailwindClass, isFraction] = useSlider(parts.prefix, '0', true);
   const { disabledStates, currentInput, setCurrentInput } = useToggleInputs("preset", fields);

@@ -4,6 +4,8 @@ import Width from "./Controls/Width"
 import Height from "./Controls/Height"
 import Margin from "./Controls/Margin"
 import { useEffect , useState } from "react"
+import Dummy from "./Controls/Dummy"
+import WidthandHeight from "./Controls/WidthandHeight"
 
 
 
@@ -35,7 +37,7 @@ function Controllers ({onChange}) {
     return (
         <div className="w-full">
 
-            <TagName 
+            {/* <TagName 
             onChange = {onChange.TagNameHandler}
             />
 
@@ -61,7 +63,8 @@ function Controllers ({onChange}) {
                         <Margin 
                             onChange = {handleChange}
                         />
-            </DropDownControl>
+            </DropDownControl> */}
+            <WidthandHeight onChange = {handleChange}/>
         </div>
     )
 
