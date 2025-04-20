@@ -18,6 +18,8 @@ export const ComponentBuilder = (pathArray = ["root"], tagName, ClassObj = {}, c
     if (!current.tagName) {
         current.tagName = tagName;
     }
+    current.tagName = tagName;
+
 
     if (!current.styles) {
         current.styles = {};
@@ -38,7 +40,6 @@ export const ComponentBuilder = (pathArray = ["root"], tagName, ClassObj = {}, c
         current.component = content;
     }
 
-    console.log(JSON.stringify(ClassBlueprint));
     return ClassBlueprint;
 };
 

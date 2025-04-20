@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 function TagName({onChange}){
 
-    const [tagName , setTagName] = useState("")
+    const [tagName , setTagName] = useState("form")
     
     const inputHandler = (value)=>{
         setTagName(value)

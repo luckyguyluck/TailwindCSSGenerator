@@ -71,12 +71,6 @@ function Output({ items }) {
           {copied ? "Copied!" : "Copy"}
         </button>
       </div>
-
-      <pre className="w-full mt-4 border bg-gray-100 dark:bg-cyan-900 p-2 rounded">
-        <code className="whitespace-pre-wrap text-xs text-gray-600 dark:text-gray-400">
-          {JSON.stringify(items, null, 2)}
-        </code>
-      </pre>
     </div>
   );
 }

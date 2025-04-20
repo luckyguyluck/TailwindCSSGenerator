@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import DropDownControl from "./Components/Shared/DropDownControl";
 import { ComponentBuilder } from "../Utils/TreeComponentProcessor";
 import Preview from "./Components/Preview";
@@ -6,20 +6,24 @@ import Controllers from "./Components/Controllers";
 import Output from './Components/Output';
 
 function GeneratorUI() {
-  let path = ["root"];
-  let TagName = "div";
-
+  const path = ["root"];
   const [component, setComponent] = useState({});
+  const [tagName, setTagName] = useState("div");
+  const [classObj, setClassObj] = useState({}); // Store current classes
 
-  const TagNameHandler = (value = "div") => {
-    TagName = value;
-  };
+  useEffect(() => {
+    const newComponent = ComponentBuilder(path, tagName, classObj);
+    setComponent({ ...newComponent });
+  }, [tagName, classObj]);
 
   const classHandler = (ClassObj) => {
-    let newComponent = {};
+    setClassObj(ClassObj); // Update only classObj, tagName stays the same
 
-    newComponent = ComponentBuilder(path, TagName, ClassObj);
-    setComponent({ ...newComponent });
+  };
+
+  const TagNameHandler = (value) => {
+    setTagName(value); // Triggers useEffect, which rebuilds
+
   };
 
   return (
@@ -39,7 +43,7 @@ function GeneratorUI() {
       </div>
 
       <div className="w-full bg-cyan-800 p-4">
-        <Output items={component} /> {/* ✅ Step 3 */}
+        <Output items={component} />
       </div>
     </div>
   );
